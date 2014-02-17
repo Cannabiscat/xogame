@@ -2,14 +2,14 @@ package com.xogame;
 
 public class Gamefield {
 
-    private static final int FIELD_SIZE = 3;
+    private static final int SIZE_FIELD = 3;
 
     private static final char DEFAULT_CHAR = ' ';
 
-    private char[][] field = new char[FIELD_SIZE][FIELD_SIZE];
+    private char[][] field = new char[SIZE_FIELD][SIZE_FIELD];
 
     public void showField() {
-        for (int i = 0; i < FIELD_SIZE; i++) {
+        for (int i = 0; i < SIZE_FIELD; i++) {
             showLine(i);
             System.out.println();
         }
@@ -17,7 +17,7 @@ public class Gamefield {
     }
 
     private void showLine(int x) {
-        for (int i = 0; i < FIELD_SIZE; i++) {
+        for (int i = 0; i < SIZE_FIELD; i++) {
             showCell(x, i);
         }
     }
@@ -26,12 +26,12 @@ public class Gamefield {
      }
 
     private void eraseLine (int lineNum) {
-        for (int i = 0; i < FIELD_SIZE; i++) {
+        for (int i = 0; i < SIZE_FIELD; i++) {
             field[i][lineNum] = DEFAULT_CHAR;
         }
     }
     public void eraseField () {
-        for (int i = 0; i < FIELD_SIZE; i++) {
+        for (int i = 0; i < SIZE_FIELD; i++) {
             eraseLine(i);
         }
     }
@@ -79,14 +79,14 @@ public class Gamefield {
 
     private String stringer(int x) {
         String string = "";
-        for (int i = 0; i < FIELD_SIZE; i++) {
+        for (int i = 0; i < SIZE_FIELD; i++) {
             string = string + field[x][i];
         }
         return string;
     }
     private String columner(int y) {
          String column = "";
-         for (int i = 0; i < FIELD_SIZE; i++) {
+         for (int i = 0; i < SIZE_FIELD; i++) {
              column = column + field[i][y];
          }
          return column;
@@ -94,12 +94,12 @@ public class Gamefield {
     private String diager(int z) {
         String diag = "";
         if (z == 1) {
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                diag = diag + field[FIELD_SIZE - 1 - i][i];
+            for (int i = 0; i < SIZE_FIELD; i++) {
+                diag = diag + field[SIZE_FIELD - 1 - i][i];
             }
         }
         else if (z == 2) {
-            for (int i = 0; i < FIELD_SIZE; i++) {
+            for (int i = 0; i < SIZE_FIELD; i++) {
                 diag = diag + field[i][i];
             }
         }
