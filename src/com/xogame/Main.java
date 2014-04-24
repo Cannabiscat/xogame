@@ -1,42 +1,31 @@
 package com.xogame;
 
-import java.util.Scanner;
-
-
-
-
 public class Main {
 
-    private static final char X = 'X';
-    private static final char O = 'O';
-
-    public static Gamefield f1 = new Gamefield();
+    public static final int SIZE = 3;
+    public static GameInterface f2 = new ConsoleGamefield();
 
     public static void main(String[] args) {
-
-        char pl = O;
-        f1.eraseField();
-        f1.showField();
-        while(!CheckWin.check(pl)) {
+        int counter = 0;
+        Value pl = Value.o;
+        f2.setSizeField(SIZE);
+        f2.eraseField();
+        f2.showField();
+        while(!CheckWin.check(pl) &&  counter < SIZE*SIZE) {
             pl = changePlayer(pl);
-            playerMove(pl);
+            f2.playersMove(pl);
+            f2.showField();
+            if (CheckWin.check(pl)) f2.messageWin(pl);
+            counter++;
         }
-        System.out.println(pl + " Вы выиграли!!");
-
+        if (counter == SIZE*SIZE && !CheckWin.check(pl)) f2.messageDraw();
     }
 
-    private static void playerMove(char pl) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Ваш ход Х и Y, " + pl + " :");
-        int x = in.nextInt();
-        int y = in.nextInt();
-        f1.set(pl, x-1, y-1);
-        f1.showField();
-    }
 
-    private static char changePlayer(char player) {
-        if (player == O) player = X; else player = O;
+
+    private static Value changePlayer(Value player) {
+        if (player == Value.o) player = Value.x; else player = Value.o;
         return player;
     }
-
 }
+
