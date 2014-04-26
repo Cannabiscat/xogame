@@ -3,7 +3,7 @@ package com.xogame;
 
 import java.util.Scanner;
 
-public class ConsoleGamefield extends MainGamefield implements GameInterface {
+public class ConsoleGamefield implements GameInterface {
 
     @Override
     public void setSizeField(int size) {
@@ -13,7 +13,6 @@ public class ConsoleGamefield extends MainGamefield implements GameInterface {
 
     private static final char DEFAULT_CHAR = ' ';
     public static char[][] consoleField = new char[SIZE_FIELD][SIZE_FIELD];
-    private static MainGamefield f1 = new MainGamefield();
     private static final int MAX_COUNTER = SIZE_FIELD*SIZE_FIELD;
 
 
@@ -32,7 +31,7 @@ public class ConsoleGamefield extends MainGamefield implements GameInterface {
 
     @Override
     public void eraseField() {
-        f1.initializeField();
+        initializeField();
         for (int j = 0; j < SIZE_FIELD; j++) {
             for (int i = 0; i < SIZE_FIELD; i++) {
                 consoleField[i][j] = DEFAULT_CHAR;
@@ -45,12 +44,12 @@ public class ConsoleGamefield extends MainGamefield implements GameInterface {
         boolean success = false;
         while (!success) {
             Scanner in = new Scanner(System.in);
-            System.out.println(player + ": Введите число от 1 до " + MainGamefield.SIZE_FIELD);
+            System.out.println(player + ": Введите число от 1 до " + SIZE_FIELD);
             try {
                 int x = in.nextInt()-1;
                 int y = in.nextInt()-1;
-                if (f1.isEmpty(x, y)) {
-                    f1.set(player, x, y);
+                if (isEmpty(x, y)) {
+                    set(player, x, y);
                     switch (player) {
                         case x : consoleField[x][y] = 'X'; break;
                         case o : consoleField[x][y] = 'O'; break;

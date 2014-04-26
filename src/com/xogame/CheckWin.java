@@ -2,7 +2,7 @@ package com.xogame;
 
 
 
-public class CheckWin extends MainGamefield {
+public abstract class CheckWin implements GameInterface {
 
     public static boolean check(Value sign) {
 
