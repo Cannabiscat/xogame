@@ -1,10 +1,8 @@
 package com.xogame;
 
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConsoleGamefield extends GameFieldMain {
+public class ConsoleGame implements Engine {
 
 
     public void setSizeField() {
@@ -13,24 +11,22 @@ public class ConsoleGamefield extends GameFieldMain {
             System.out.print("Введите размерность игрового поля: ");
             Scanner scanner = new Scanner(System.in);
             try {
-                this.sizeField = scanner.nextInt();
+                this.field.sizeField = scanner.nextInt();
                 fault = false;
             }catch(Exception er){
                 System.out.println("Неверный ввод, попробуйте снова!!");
             }
         }
     }
-
-    @Override
     public void showField() {
-        for (int i = 0; i < sizeField; i++) {
+        for (int i = 0; i < field.sizeField; i++) {
             System.out.print("  " + (i + 1) );
         }
         System.out.println();
-        for (int i = 0; i < sizeField; i++) {
+        for (int i = 0; i < field.sizeField; i++) {
             System.out.print(i + 1);
-            for (int j = 0; j < sizeField; j++) {
-                switch(field.get(j).get(i)) {
+            for (int j = 0; j < field.sizeField; j++) {
+                switch(field.f1.get(j).get(i)) {
                     case empty: {
                         System.out.print("[ ]"); break;
                     }
@@ -46,18 +42,16 @@ public class ConsoleGamefield extends GameFieldMain {
         }
         System.out.println();
     }
-
-    @Override
     public void playersMove(Value player) {
         boolean fault = true;
         while (fault) {
             Scanner in = new Scanner(System.in);
-            System.out.println(player + ": Введите число от 1 до " + sizeField);
+            System.out.println(player + ": Введите число от 1 до " + field.sizeField);
             try {
                 int x = in.nextInt()-1;
                 int y = in.nextInt()-1;
-                if (isCellEmpty(x, y)) {
-                    setFieldCell(player, x, y);
+                if (field.isCellEmpty(x, y)) {
+                    field.setFieldCell(player, x, y);
                     fault = false;
                 } else System.out.println("Поле занято, попробуйте ещё раз, " + player + "!!");
             } catch (Exception e) {
@@ -65,13 +59,9 @@ public class ConsoleGamefield extends GameFieldMain {
             }
         }
     }
-
-
     public void messageWin(Value player) {
         System.out.println( player + ", Вы выиграли!!");
     }
-
-
     public void messageDraw() {
         System.out.println("Ничья!!");
     }
