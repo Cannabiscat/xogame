@@ -4,7 +4,34 @@ import java.util.Scanner;
 
 public class ConsoleGame implements Engine {
 
+    Check check = new Check();
+    GlobalVars var = new GlobalVars();
+    Thread thread  = new Thread(this);
 
+    private static Value player = Value.o;
+
+    int counter = 0;
+
+    public void run(){
+        setSizeField();
+        field.initField();
+        showField();
+        while (!check.win(player) && counter < field.sizeField * field.sizeField) {
+            player = Value.changePlayer(player);
+            playersMove(player);
+            showField();
+            if (check.win(player)) messageWin(player);
+            counter++;
+        }
+        if ((counter == (field.sizeField * field.sizeField)) && !check.win(player)) messageDraw();
+
+        var.exit = true;
+
+    }
+
+    ConsoleGame() {
+        thread.start();
+    }
     public void setSizeField() {
         boolean fault = true;
         while (fault) {

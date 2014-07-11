@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 28.06.2014.
  */
-public class Field {
+public class EngineField {
 
     public static ArrayList<ArrayList<Value>> f1;
     public static int sizeField;
 
-    public Field() {
+    public EngineField() {
         f1 =  new ArrayList<>();
     }
     public void setFieldCell(Value value, int x, int y) {

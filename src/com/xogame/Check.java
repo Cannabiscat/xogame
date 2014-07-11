@@ -3,12 +3,33 @@ package com.xogame;
 /**
  * Created by Alex on 26.06.2014.
  */
-public class Check {
+public class Check implements Runnable{
+
+    GlobalVars var = new GlobalVars();
+
+    Thread thread = new Thread(this);
+
+
+
+    public void run() {
+//        while (!var.exit)
+//        {
+//            try {
+//                var.monitor.wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
+    Check() {
+        thread.start();
+    }
 
     public boolean win(Value sign) {
         Boolean win = false;
         if (sign != Value.empty) {
-            for (int pointer = 0; pointer < Field.sizeField; pointer++) {
+            for (int pointer = 0; pointer < EngineField.sizeField; pointer++) {
                 if (checkColumn(pointer, sign)) win = checkColumn(pointer, sign);
                 if (checkLine(pointer, sign)) win = checkLine(pointer, sign);
             }
@@ -33,16 +54,16 @@ public class Check {
 
     private String stringer(int pointer) {
         String string = "";
-        for (int i = 0; i < Field.sizeField; i++) {
-            string = string + Field.f1.get(pointer).get(i);
+        for (int i = 0; i < EngineField.sizeField; i++) {
+            string = string + EngineField.f1.get(pointer).get(i);
         }
         return string;
     }
 
     private String columner(int pointer) {
         String column = "";
-        for (int i = 0; i < Field.sizeField; i++) {
-            column = column + Field.f1.get(i).get(pointer);
+        for (int i = 0; i < EngineField.sizeField; i++) {
+            column = column + EngineField.f1.get(i).get(pointer);
         }
         return column;
     }
@@ -51,14 +72,14 @@ public class Check {
         String diag = "";
         switch (pointer) {
             case 0: {
-                for (int i = 0; i < Field.sizeField; i++) {
-                    diag = diag + Field.f1.get(Field.sizeField - 1 - i).get(i);
+                for (int i = 0; i < EngineField.sizeField; i++) {
+                    diag = diag + EngineField.f1.get(EngineField.sizeField - 1 - i).get(i);
                 }
                 break;
             }
             case 1: {
-                for (int i = 0; i < Field.sizeField; i++) {
-                    diag = diag + Field.f1.get(i).get(i);
+                for (int i = 0; i < EngineField.sizeField; i++) {
+                    diag = diag + EngineField.f1.get(i).get(i);
                 }
                 break;
             }

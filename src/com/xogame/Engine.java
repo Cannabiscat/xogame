@@ -1,14 +1,10 @@
 package com.xogame;
 
 
-public interface Engine {
+public interface Engine extends Runnable {
 
-    Field field = new Field();
-
-    void messageWin(Value player);
-    void messageDraw();
-    void setSizeField();
-    void showField();
-    void playersMove(Value player);
+//    public GlobalVars var = new GlobalVars();
+    static EngineField field = new EngineField();
+    GlobalVars var = new GlobalVars();
 
 }
