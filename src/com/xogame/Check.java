@@ -12,14 +12,20 @@ public class Check implements Runnable{
 
 
     public void run() {
-//        while (!var.exit)
-//        {
-//            try {
-//                var.monitor.wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        while(!var.exit) {
+            if (win(var.player)){
+                var.exit = true;
+                var.win = true;
+            }
+            synchronized (var.monitor) {
+                var.monitor.notify();
+                try {
+                    var.monitor.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     Check() {

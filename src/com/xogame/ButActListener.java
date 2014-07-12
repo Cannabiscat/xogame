@@ -1,5 +1,6 @@
 package com.xogame;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,29 +13,24 @@ public class ButActListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
+
+        synchronized (var.monitor) {
+            var.monitor.notify();
+        }
         int x = ((Button)event.getSource()).geTx();
         int y = ((Button)event.getSource()).geTy();
-        if (Engine.field.isCellEmpty(x,y)) {
-            Engine.field.setFieldCell(var.player,x,y);
-            switch (var.player) {
-                case x:
-                {
-                    ((Button) event.getSource()).setText("X");
-                    var.player = Value.changePlayer(var.player);
-                    break;
-                }
-                case o:
-                {
-                    ((Button) event.getSource()).setText("O");
-                    var.player = Value.changePlayer(var.player);
-                    break;
+        if (!var.exit) {
+            if (Engine.field.isCellEmpty(x,y)) {
+                var.counter++;
+                var.player = Value.changePlayer(var.player);
+                Engine.field.setFieldCell(var.player,x,y);
+                switch (var.player) {
+                    case x:((Button) event.getSource()).setText("X");break;
+                    case o:((Button) event.getSource()).setText("O");break;
                 }
             }
-
-            synchronized (var.monitor) {
-                    var.monitor.notify();
-            }
-
+            else JOptionPane.showMessageDialog(null, "Клетка занята!!");
         }
+        if(var.win) JOptionPane.showMessageDialog(null , "" + var.player + " выиграл!!");
     }
 }

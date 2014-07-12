@@ -20,7 +20,7 @@ public class ButtonArray {
         for (int i = 0; i < sizeField; i++) graphic.add(new ArrayList<Button>());
         for (int i = 0; i < sizeField; i++) {
             for (int j = 0; j < sizeField; j++) {
-                graphic.get(j).add(new Button("" + i + j, i, j));
+                graphic.get(j).add(new Button("", i, j));
             }
         }
     }
